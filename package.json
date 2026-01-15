@@ -1,0 +1,200 @@
+{
+  "name": "udo-universal-orchestrator",
+  "displayName": "UDO - Universal Dynamic Orchestrator",
+  "description": "AI project memory and continuity across sessions and LLMs",
+  "version": "0.1.0",
+  "publisher": "carderel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carderel/udo-vscode-extension"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "ai",
+    "llm",
+    "memory",
+    "context",
+    "orchestrator",
+    "claude",
+    "copilot",
+    "chatgpt"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "udo.initialize",
+        "title": "UDO: Initialize Project"
+      },
+      {
+        "command": "udo.resume",
+        "title": "UDO: Resume"
+      },
+      {
+        "command": "udo.deepResume",
+        "title": "UDO: Deep Resume"
+      },
+      {
+        "command": "udo.quickHandoff",
+        "title": "UDO: Quick Handoff"
+      },
+      {
+        "command": "udo.fullHandoff",
+        "title": "UDO: Full Handoff"
+      },
+      {
+        "command": "udo.status",
+        "title": "UDO: Status"
+      },
+      {
+        "command": "udo.addLesson",
+        "title": "UDO: Add Lesson"
+      },
+      {
+        "command": "udo.searchSessions",
+        "title": "UDO: Search Sessions"
+      },
+      {
+        "command": "udo.openFolder",
+        "title": "UDO: Open UDO Folder"
+      },
+      {
+        "command": "udo.openRules",
+        "title": "UDO: Open Rules"
+      },
+      {
+        "command": "udo.openHardStops",
+        "title": "UDO: Open Hard Stops"
+      },
+      {
+        "command": "udo.openState",
+        "title": "UDO: Open Project State"
+      },
+      {
+        "command": "udo.takeover",
+        "title": "UDO: Takeover Mode"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "udo.resume",
+        "key": "ctrl+shift+u r",
+        "mac": "cmd+shift+u r"
+      },
+      {
+        "command": "udo.quickHandoff",
+        "key": "ctrl+shift+u h",
+        "mac": "cmd+shift+u h"
+      },
+      {
+        "command": "udo.status",
+        "key": "ctrl+shift+u s",
+        "mac": "cmd+shift+u s"
+      },
+      {
+        "command": "udo.addLesson",
+        "key": "ctrl+shift+u l",
+        "mac": "cmd+shift+u l"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "udo-sidebar",
+          "title": "UDO",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "udo-sidebar": [
+        {
+          "id": "udo-status",
+          "name": "Status"
+        },
+        {
+          "id": "udo-sessions",
+          "name": "Sessions"
+        },
+        {
+          "id": "udo-lessons",
+          "name": "Lessons"
+        },
+        {
+          "id": "udo-quickaccess",
+          "name": "Quick Access"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "UDO",
+      "properties": {
+        "udo.globalPath": {
+          "type": "string",
+          "default": "~/.udo",
+          "description": "Path to global UDO storage"
+        },
+        "udo.autoHandoffOnClose": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prompt for handoff when closing VS Code"
+        },
+        "udo.autoSaveOnClose": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-save minimal session on close if no handoff"
+        },
+        "udo.reminderEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show periodic checkpoint reminders"
+        },
+        "udo.reminderIntervalMinutes": {
+          "type": "number",
+          "default": 30,
+          "description": "Minutes between checkpoint reminders"
+        },
+        "udo.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show UDO status in status bar"
+        },
+        "udo.contextFilePath": {
+          "type": "string",
+          "default": "~/.udo/current-context.md",
+          "description": "Path to context file for AI integration"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  }
+}
